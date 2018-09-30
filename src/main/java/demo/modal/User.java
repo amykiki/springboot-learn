@@ -1,5 +1,7 @@
 package demo.modal;
 
+import java.util.Date;
+
 /**
  * @author :  ZouShumin
  * @Project Name :  springboot-learn
@@ -11,6 +13,8 @@ package demo.modal;
 public class User {
     private Integer id;
     private String name;
+    private Date date;
+
     private String department;
 
     public Integer getId() {
@@ -35,5 +39,13 @@ public class User {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
