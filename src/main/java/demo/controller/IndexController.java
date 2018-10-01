@@ -1,6 +1,7 @@
 package demo.controller;
 
-import demo.modal.User;
+import demo.model.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,17 +15,28 @@ import java.util.Map;
 @RequestMapping(value = "/index")
 public class IndexController {
 
+    //每次服务重启，这个随机值都会变
+    @Value("${rancoo.secret}")
+    private String secret;
+    @Value("${rancoo.number}")
+    private int number;
+    @Value("${rancoo.desc}")
+    private String domainDesc;
+
     @RequestMapping
     public String index() {
         return "hello world Amy";
     }
 
     @RequestMapping(value = "/getByName")
-    public Map<String, String> getByName(@RequestParam String name) {
-        Map<String, String> result = new HashMap<>();
+    public Map<String, Object> getByName(@RequestParam String name) {
+        Map<String, Object> result = new HashMap<>();
         result.put("姓名", name);
         result.put("爱好", "阅读，编程");
         result.put("工作", "软件工程师");
+        result.put("随机密码", secret);
+        result.put("随机整数", number);
+        result.put("网站描述", domainDesc);
         return result;
     }
 
@@ -33,7 +45,10 @@ public class IndexController {
         User user = new User();
         user.setId(id);
         user.setName(name);
+        //server console打出的时间时区是当前时区，而网页上显示的时区是spring配置的时区
+        //因此网页上要设置当前时区需要单独配置，参考application.properties的配置
         user.setDate(new Date());
+        System.out.println(user.getDate());
         user.setDepartment("挖坑填坑部");
         return user;
     }

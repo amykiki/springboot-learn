@@ -1,11 +1,11 @@
-package demo.modal;
+package demo.model;
 
 import java.util.Date;
 
 /**
  * @author :  ZouShumin
  * @Project Name :  springboot-learn
- * @Package Name :  demo.modal
+ * @Package Name :  demo.model
  * @Description :
  * @Creation Date:  2018-09-29 11:46
  * --------  ---------  --------------------------

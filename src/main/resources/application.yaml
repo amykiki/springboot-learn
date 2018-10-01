@@ -1,0 +1,3 @@
+#在同一目录下,properties配置优先级> YAML配置优先级
+server:
+    port: 8020
