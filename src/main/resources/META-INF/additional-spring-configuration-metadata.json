@@ -1,23 +1,23 @@
 {
   "properties": [
     {
-      "name": "rancoo.secret",
+      "name": "learnboot.secret",
       "type": "java.lang.String",
-      "description": "Description for rancoo.secret."
+      "description": "Description for learnboot.secret."
     },
     {
-      "name": "rancoo.number",
+      "name": "learnboot.number",
       "type": "java.lang.String",
-      "description": "Description for rancoo.number."
+      "description": "Description for learnboot.number."
     },
     {
-      "name": "rancoo.name",
+      "name": "learnboot.name",
       "type": "java.lang.String",
-      "description": "Description for rancoo.name."
+      "description": "Description for learnboot.name."
     },
     {
-      "name": "rancoo.desc",
+      "name": "learnboot.desc",
       "type": "java.lang.String",
-      "description": "Description for rancoo.desc."
+      "description": "Description for learnboot.desc."
     }
   ] }

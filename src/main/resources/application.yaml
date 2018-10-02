@@ -2,7 +2,7 @@
 # 在yaml设置的profile，properties文件也可以读到
 spring:
     profiles:
-      active: prod
+      active: test
 
 # yaml在配置文件中添加三个英文状态的短横线即可区分不同的profile
 ---
@@ -10,12 +10,13 @@ spring:
     profiles: dev
 server:
   port: 8080
-
 ---
 spring:
     profiles: test
 server:
   port: 8081
+learnboot:
+    name: www.learnboot-test.com
 
 ---
 spring:

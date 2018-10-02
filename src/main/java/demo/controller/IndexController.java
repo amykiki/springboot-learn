@@ -16,12 +16,14 @@ import java.util.Map;
 public class IndexController {
 
     //每次服务重启，这个随机值都会变
-    @Value("${rancoo.secret}")
+    @Value("${learnboot.secret}")
     private String secret;
-    @Value("${rancoo.number}")
+    @Value("${learnboot.number}")
     private int number;
-    @Value("${rancoo.desc}")
+    @Value("${learnboot.desc}")
     private String domainDesc;
+    @Value("${env}")
+    private String env;
 
     @RequestMapping
     public String index() {
@@ -37,6 +39,8 @@ public class IndexController {
         result.put("随机密码", secret);
         result.put("随机整数", number);
         result.put("网站描述", domainDesc);
+        result.put("运行环境", env);
+        result.put("当前时间", new Date());
         return result;
     }
 
