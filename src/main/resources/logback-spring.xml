@@ -3,6 +3,7 @@
 
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
     <contextName>learnboot</contextName>
+    <!--从spring envrionment中取出properties的值，env，该值定义在application-{profile}.properties-->
     <springProperty name="log_env" source="env"/>
     <property name="console_pattern"
               value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){blue} %clr(%5level) %clr(${PID:- }){magenta} --- [%-15.15thread] %clr(%-35.35logger{34}){blue} : %m%n%ex"/>
