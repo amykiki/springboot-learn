@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<configuration scan="true" scanPeriod="30 seconds">
+<configuration scan="true" scanPeriod="1 seconds">
+
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
     <contextName>learnboot</contextName>
     <property name="console_pattern"
-              value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){blue} %clr(%5level) %clr(${PID:- }){magenta} --- [%-12.12thread] %-35.35logger{34} : %m%n%ex"/>
+              value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){blue} %clr(%5level) %clr(${PID:- }){magenta} --- [%-15.15thread] %clr(%-35.35logger{34}){blue} : %m%n%ex"/>
     <property name="file_pattern"
               value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5level ${PID:- } --- [%thread] %-45.45logger{44} : %m%n%ex"/>
 
-    <property name="dev_log_file" value="D:\\codeProject\\git_repo\\springboot-learn\\log\\dev-app.log"/>
+    <!--定义三个环境日志文件路径-->
+    <property name="log_path" value="D:\\codeProject\\git_repo\\springboot-learn\\log"/>
+    <property name="log_name" value="app"/>
+    <property name="dev_log_file" value="${log_path}\\dev\\${log_name}"/>
+    <property name="dev_log_warn_file" value="${log_path}\\dev\\app-warn"/>
+    <property name="dev_log_error_file" value="${log_path}\\dev\\app-error"/>
+    <property name="test_log_file" value="${log_path}\\test\\${log_name}"/>
+    <property name="prod_log_file" value="${log_path}\\prod\\${log_name}"/>
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${console_pattern}</pattern>
@@ -14,14 +24,14 @@
         <target>System.out</target>
     </appender>
 
-    <appender name="DEV_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${dev_log_file}</file>
+    <appender name="DEV_ALL_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${dev_log_file}.log</file>
         <append>true</append>
         <encoder>
             <pattern>${file_pattern}</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${dev_log_file}.%d{yyyy-MM-dd}.%i。log</fileNamePattern>
+            <fileNamePattern>${dev_log_file}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!--日志数量最大保存时间，根据设置的fileNamePattern来确定翻转周期
                 如本例中为%d{yyyy-MM-dd}，则翻转周期为天-->
             <maxHistory>30</maxHistory>
@@ -31,4 +41,51 @@
             <totalSizeCap>200MB</totalSizeCap>
         </rollingPolicy>
     </appender>
+
+    <appender name="DEV_WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${dev_log_warn_file}.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${file_pattern}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${dev_log_warn_file}-%d{yyyy_MM-dd}.log</fileNamePattern>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="DEV_ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${dev_log_error_file}.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${file_pattern}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${dev_log_error_file}-%d{yyyy_MM-dd}.log</fileNamePattern>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <!--输出INFO及以上日志到DEV_ALL_FILE-->
+        <appender-ref ref="DEV_ALL_FILE"/>
+        <!--只输出WARN级别日志到DEV_WARN_FILE-->
+        <appender-ref ref="DEV_WARN_FILE"/>
+        <!--输出ERROR及以上日志到DEV_ERROR_FILE-->
+        <appender-ref ref="DEV_ERROR_FILE"/>
+    </root>
+
+    <!--对于demo.controller.IndexController需要输出到root的appender中
+        该logger本身没有设置appender，additivity为true，把信息向上传递-->
+    <logger name="demo.controller.IndexController" additivity="true" level="DEBUG"/>
+
 </configuration>

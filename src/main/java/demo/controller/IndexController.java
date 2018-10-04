@@ -1,11 +1,14 @@
 package demo.controller;
 
 import demo.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.pattern.PathPattern;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -14,6 +17,8 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/index")
 public class IndexController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
+    private static int count = 0;
 
     //每次服务重启，这个随机值都会变
     @Value("${learnboot.secret}")
@@ -41,6 +46,12 @@ public class IndexController {
         result.put("网站描述", domainDesc);
         result.put("运行环境", env);
         result.put("当前时间", new Date());
+        LOGGER.trace("==={} -- LOG TRACE MSG======",count);
+        LOGGER.debug("==={} -- LOG DEBUG MSG======",count);
+        LOGGER.info("==={} -- LOG INFO  MSG======",count);
+        LOGGER.warn("==={} -- LOG WARN  MSG======",count);
+        LOGGER.error("==={} -- LOG ERROR MSG======",count);
+        count++;
         return result;
     }
 
