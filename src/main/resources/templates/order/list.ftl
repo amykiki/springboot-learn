@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang=" zh-cmn">
+<html lang=" zh-cmn" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     <title>订单列表</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
 <table class="table table-bordered table-hover .table-sm">
@@ -42,8 +42,14 @@
         </tr>
     </tbody>
 </table>
-<script src="/webjars/jquery/3.0.0/jquery.min.js"/>
-<script src="/webjars/popper.js/1.14.3/popper.min.js"/>
-<script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"/>
+<div class="container">
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+        <strong>Success!</strong> It is working as we expected.
+    </div>
+</div>
+<script src="/webjars/jquery/jquery.min.js"/></script>
+<script src="/webjars/popper.js/umd/popper.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
