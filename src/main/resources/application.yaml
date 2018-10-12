@@ -4,6 +4,11 @@ spring:
     profiles:
       active: dev
 
+
+server:
+  error:
+    include-exception: true
+
 # yaml在配置文件中添加三个英文状态的短横线即可区分不同的profile
 ---
 spring:
