@@ -1,6 +1,6 @@
 package demo.enums;
 
-public enum OrderStatus {
+public enum OrderStatusEnum {
     WAIT_PAID(0),
     ALREADY_PAID(1),
     WAIT_DELIVERED(2),
@@ -9,7 +9,7 @@ public enum OrderStatus {
     ORDER_CLOSED(5),
     ORDER_FAIL(6);
 
-    OrderStatus(Integer status) {
+    OrderStatusEnum(Integer status) {
         this.status = status;
     }
     private Integer status;
